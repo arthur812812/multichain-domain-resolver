@@ -1,7 +1,7 @@
 {
-  "name": "nodejs-typescript-template",
-  "version": "1.308.0",
-  "description": "A template for a nodejs application, using typescript",
+  "name": "multichain-domain-resolver",
+  "version": "0.1.0",
+  "description": "The all-in-one library for resolving blockchain domains",
   "main": "dist/src/index.js",
   "author": "",
   "license": "MIT",
