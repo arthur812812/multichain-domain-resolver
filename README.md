@@ -1,37 +1,43 @@
-A TypeScript library for resolving blockchain domain names across TON, EVM, Cardano.
+A TypeScript library for resolving blockchain domain names across EVM and Cardano, with the ability to add or replace default services.
 
-## Install
+## Usage
+```typescript
+// ./scripts/dev-run.ts
 
-1. Install [node.js](https://nodejs.org/en/download/), [yarn](https://yarnpkg.com/getting-started/install) (or use npm).
-2. Clone this repository, and using a terminal navigate to its directory.
-3. Run `yarn` or `npm install` to install the dependencies.
+import { addServices, defaultResolvers } from '../src';
 
-## Build & Run
+const adaHandles = await defaultResolvers.ada(
+  'addr1w8qmxkacjdffxah0l3qg8hq2pmvs58q8lcy42zy9kda2ylc6dy5r4',
+);
+const rss3Handles = await defaultResolvers.evm(
+  '0xd8da6bf26964af9d7eed9e03e53415d37aa96045',
+);
 
-1. Copy the contents of the `.env.example` file to a `.env` next to it, and edit it with your values.
-2. Run `yarn build` or `npm build` to build the files.
-3. Run `yarn start` or `npm start` to start the application.
+console.log(adaHandles);
+// ['vitalik.eth','0xd8da6bf26964af9d7eed9e03e53415d37aa96045.csb','vitalik.eth', 'vitalik.lens']
+console.log(rss3Handles);
+// All ADA handles for SNEK burn addresses
+// [
+//   'bikerox75',
+//   'bobonereza',
+//   'burnawoo',
+//   'burnsnek',
+// ... many more here
+// ];
 
-## Developing
+const newServices = {
+  new: (address: string) => Promise.resolve([]),
+  ton: (address: string) => Promise.resolve(['ton_domain_1']),
+};
 
-### Visual Studio Code
+const extendedResolvers = addServices(newServices, defaultResolvers);
 
--   Installing the Eslint (`dbaeumer.vscode-eslint`) and Prettier - Code formatter (`esbenp.prettier-vscode`) extensions is recommended.
+// Autocomplete works for 'ada', 'evm', 'ton', 'new' in extendedResolvers object
+const mockedTonResolver = await extendedResolvers.ton('ton_address');
+console.log('mockedTonResolver', mockedTonResolver);
 
-## Linting & Formatting
+```
 
--   Run `yarn lint` or `npm lint` to lint the code.
--   Run `yarn format` or `npm format` to format the code.
-
-## Testing
-
-Check the placeholder test examples to get started : 
-
-- `/src/app.ts` that provide a function `sum` 
-- `/test/app.spec.ts` who test the `sum` function 
-
-This files are just an example, feel free to remove it
-
--   Run `yarn test` or `npm test` to execute all tests.
--   Run `yarn test:watch` or `npm test:watch` to run tests in watch (loop) mode.
--   Run `yarn test:coverage` or `npm test:coverage` to see the tests coverage report.
+### TODO
+- [ ] Add an initializer for default resolvers (to add a BlockFrost key to the ADA resolver).
+- [ ] Improve TS type checking.
