@@ -16,7 +16,7 @@ const rss3Handles = await defaultResolvers.evm(
 console.log(adaHandles);
 // ['vitalik.eth','0xd8da6bf26964af9d7eed9e03e53415d37aa96045.csb','vitalik.eth', 'vitalik.lens']
 console.log(rss3Handles);
-// All ADA handles for SNEK burn addresses
+// All ADA handles for SNEK burn address
 // [
 //   'bikerox75',
 //   'bobonereza',
