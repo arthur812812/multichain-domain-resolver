@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "description": "The all-in-one library for resolving blockchain domains",
   "main": "dist/src/index.js",
+  "type": "module",
   "author": "",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --watch src/**/*.ts --exec ts-node ./src/app.ts",
+    "dev": "nodemon --watch src/*.ts --watch src/**/*.ts --watch scripts/**/*.ts --exec tsx scripts/dev-run.ts",
+    "dev-run": "tsx scripts/dev-run.ts",
     "build": "tsc",
     "start": "node ./dist/app.js",
     "lint": "eslint --fix --quiet src/**/*.ts",
@@ -16,6 +18,7 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
+    "@rss3/js-sdk": "^0.6.57",
     "dotenv": "^16.4.5"
   },
   "devDependencies": {
@@ -31,6 +34,7 @@
     "prettier": "^3.2.5",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
+    "tsx": "^4.15.7",
     "typescript": "^5.4.5",
     "typescript-eslint-parser": "^22.0.0"
   }

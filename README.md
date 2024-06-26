@@ -1,4 +1,4 @@
-A TypeScript library for resolving blockchain domain names across TON, EVM, Cardano,
+A TypeScript library for resolving blockchain domain names across TON, EVM, Cardano.
 
 ## Install
 
